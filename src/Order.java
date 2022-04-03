@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 import static java.lang.Long.parseLong;
 
 public class Order {
@@ -15,8 +16,44 @@ public class Order {
 
     private long customrId;
 
-    public Order(String orderInfo)  {
-       //To Do
+    public Order(String orderInfo) throws ParseException {
+        String[] arr=orderInfo.split("");
+        orderId=Long.parseLong(arr[1]);
+        orderDate=new SimpleDateFormat("dd/MM/yyyy").parse(arr[4]);
+        deliveryDate=new SimpleDateFormat("dd/MM/yyyy").parse(arr[7]);
+        switch (arr[9]){
+         case   "Complete":
+            {
+              status= OrderStatus.Complete;
+              break;
+            }
+            case "Pickup":
+            {
+                status= OrderStatus.Pickup;
+                break;
+            }
+            case "Processing":
+            {
+                status= OrderStatus.Processing;
+                break;
+            }
+            case "Cancelled":
+            {
+                status= OrderStatus.Cancelled;
+                break;
+            }
+            case "AwaitingPayment":
+            {
+                status= OrderStatus.AwaitingPayment;
+                break;
+            }
+            default:           status= OrderStatus.Complete; break;
+
+        }
+
+        customrId=Long.parseLong(arr[12]);
+
+
     }
 
     public Order(long Oid, Date OorderDate, Date OdeliveryDate, OrderStatus Ostatus, long OcustomrId)

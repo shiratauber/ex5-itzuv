@@ -9,8 +9,11 @@ public class Customer {
     private int tier;
 
     public Customer(String customerInfo)
-    {
-         //To Do
+    {String[] arrOfStrings= customerInfo.split("");
+       id= Long.parseLong(arrOfStrings[1]);
+       name=arrOfStrings[3];
+       tier= Integer.parseInt(arrOfStrings[5]);
+
     }
 
     public Customer(long Cid,String Cname, int Ctier)

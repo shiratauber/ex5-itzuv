@@ -11,7 +11,62 @@ public class Product
 
     public Product(String orderInfo)
     {
-        //To Do
+        String[] arr=orderInfo.split("");
+        ProductId= Long.parseLong(arr[1]);
+        name=arr[2];
+        switch (arr[4]){
+            case   "PC":
+            {
+                category= ProductCategory.PC;
+                break;
+            }
+            case "Printers":
+            {
+                category= ProductCategory.Printers;
+                break;
+            }
+            case "Displays":
+            {
+                category= ProductCategory.Displays;
+                break;
+            }
+            case "Network":
+            {
+                category= ProductCategory.Network;
+                break;
+            }
+            case "Accessories":
+            {
+                category= ProductCategory.Accessories;
+                break;
+            }
+            case "Software":
+            {
+                category= ProductCategory.Software;
+                break;
+            }
+            case "Gaming":
+            {
+                category= ProductCategory.Gaming;
+                break;
+            }
+            case "Storage":
+            {
+                category= ProductCategory.Storage;
+                break;
+            }
+            case "Cameras":
+            {
+                category= ProductCategory.Cameras;
+                break;
+            }
+
+            default:   category= ProductCategory.PC; break;
+
+
+        }
+        price= Double.parseDouble(arr[6]);
+
     }
 
     public Product(long PId, String Pname, ProductCategory Pcategory, double Pprice)
