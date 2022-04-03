@@ -16,11 +16,16 @@ public class Order {
 
     private long customrId;
 
-    public Order(String orderInfo) throws ParseException {
-        String[] arr=orderInfo.split("");
+    public Order(String orderInfo) {
+        String[] arr=orderInfo.split(" ");
         orderId=Long.parseLong(arr[1]);
+        try{
         orderDate=new SimpleDateFormat("dd/MM/yyyy").parse(arr[4]);
-        deliveryDate=new SimpleDateFormat("dd/MM/yyyy").parse(arr[7]);
+        deliveryDate=new SimpleDateFormat("dd/MM/yyyy").parse(arr[7]);}
+        catch(Exception e)
+        {
+            System.out.println("problem with the date");
+        }
         switch (arr[9]){
          case   "Complete":
             {

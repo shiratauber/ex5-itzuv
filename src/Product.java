@@ -11,7 +11,7 @@ public class Product
 
     public Product(String orderInfo)
     {
-        String[] arr=orderInfo.split("");
+        String[] arr=orderInfo.split(" ");
         ProductId= Long.parseLong(arr[1]);
         name=arr[2];
         switch (arr[4]){

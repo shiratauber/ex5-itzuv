@@ -9,7 +9,7 @@ public class Customer {
     private int tier;
 
     public Customer(String customerInfo)
-    {String[] arrOfStrings= customerInfo.split("");
+    {String[] arrOfStrings= customerInfo.split(" ");
        id= Long.parseLong(arrOfStrings[1]);
        name=arrOfStrings[3];
        tier= Integer.parseInt(arrOfStrings[5]);
