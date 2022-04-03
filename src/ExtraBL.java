@@ -112,8 +112,9 @@ public class ExtraBL implements IBL {
     public Product getMaxOrderedProduct() {
         //To do
         Product p = DataSource.allProducts.stream()
-                .max( (DataSource.allOrderProducts.stream().
-        filter(order->order.getProductId()) ).count() ).orElse(null);
+                .max((pr,pr2)-> (int)(DataSource.allOrderProducts.stream().
+        filter(order->order.getProductId()==pr.getProductId()) ).count()-(int)(DataSource.allOrderProducts.stream().
+                        filter(order->order.getProductId()==pr2.getProductId()) ).count() ).orElse(null);
 
         return p;
 
