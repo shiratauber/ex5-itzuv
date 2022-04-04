@@ -113,7 +113,7 @@ public class BL implements IBL {
                         (DataSource.allOrders.stream().filter(order->order.getCustomrId()==customer
                                 .getId() && (DataSource.allOrderProducts.stream()
                                 .filter(product->product.getOrderId()==order.getOrderId() &&
-                                        productId== product.getProductId()).count()>0)))!=null).
+                                        productId== product.getProductId()).count()>0))).count()>0).
                 collect(Collectors.toList());
     }
 
