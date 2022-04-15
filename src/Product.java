@@ -15,7 +15,7 @@ public class Product
         String[] arr=orderInfo.split(" ");
         ProductId= Long.parseLong(arr[1]);
         name=arr[2];
-        switch (arr[4]){
+        switch (arr[4]){ //for each case
             case   "PC":
             {
                 category= ProductCategory.PC;

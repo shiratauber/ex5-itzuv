@@ -26,7 +26,7 @@ public class Order {
         {
             System.out.println("problem with the date");
         }
-        switch (arr[9]){
+        switch (arr[9]){ //for each case
          case   "Complete":
             {
               status= OrderStatus.Complete;

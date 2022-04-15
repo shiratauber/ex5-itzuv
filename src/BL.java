@@ -1,19 +1,17 @@
-
+/*
+authors:
+Shira Tauber 213936271
+Shvut Lazare 213195977
+ex5 itzuv
+*/
 import java.util.Comparator;
-
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.reverseOrder;
-import static java.util.Map.Entry.comparingByValue;
-import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.*;
 
 public class BL implements IBL {
     @Override
     public Product getProductById(long productId) {
-        //Shira
         List<Product> p=  DataSource.allProducts.stream().filter(product -> product.getProductId()==
                 productId).collect(Collectors.toList());
         if (p.size()==0)
@@ -24,12 +22,11 @@ public class BL implements IBL {
         {
             return p.get(0);
         }
-        return null;
+        return null; // for case there is more than one.
     }
 
     @Override
     public Order getOrderById(long orderId) {
-        //Shira
         List<Order> p=  DataSource.allOrders.stream().filter(order -> order.getOrderId()==
                 orderId).collect(Collectors.toList());
         if (p.size()==0)
@@ -40,12 +37,11 @@ public class BL implements IBL {
         {
             return p.get(0);
         }
-        return null;
+        return null; // for case there is more than one.
     }
 
     @Override
     public Customer getCustomerById(long customerId) {
-        //Shira
         List<Customer> p=  DataSource.allCustomers.stream().filter(customer -> customer.getId()==
                 customerId).collect(Collectors.toList());
         if (p.size()==0)
@@ -56,7 +52,7 @@ public class BL implements IBL {
         {
             return p.get(0);
         }
-        return null;
+        return null; // for case there is more than one.
     }
 
 
@@ -68,7 +64,6 @@ public class BL implements IBL {
 
     @Override
     public List<Customer> popularCustomers() {
-        //shira
         return DataSource.allCustomers.
                 stream().filter(customer -> customer.getTier()==3 && (DataSource.allOrders.stream().
                         filter(order->order.getCustomrId()==customer.getId())).count()>10).sorted(Comparator.comparingLong(Customer::getId) ).collect(Collectors.toList());
@@ -90,15 +85,6 @@ public class BL implements IBL {
 
     @Override
     public List<Product> getPopularOrderedProduct(int orderedtimes) {
-        //Shira
-      System.out.println(DataSource.allOrderProducts.stream().filter(order->
-              (   order.getProductId()==0 )&& (getOrderById(order.getOrderId()).getStatus()!=OrderStatus.Cancelled)).count());
-System.out.println(getOrderById(169));
-        System.out.println(DataSource.allOrderProducts.stream().filter(order->
-                (   order.getProductId()==498 )&& (getOrderById(order.getOrderId()).getStatus()!=OrderStatus.Cancelled)).count());
-        System.out.println(DataSource.allOrderProducts.stream().filter(order->
-                (   order.getProductId()==135 )&& (getOrderById(order.getOrderId()).getStatus()!=OrderStatus.Cancelled)).count());
-
         return DataSource.allProducts.stream().filter(pro->
                         (DataSource.allOrderProducts.stream().filter(order->
                                 (   order.getProductId()==pro.getProductId() )&& (getOrderById(order.getOrderId())!=null)).count())>=orderedtimes).
@@ -118,7 +104,6 @@ System.out.println(getOrderById(169));
 
     @Override
     public List<Customer> getCustomersWhoOrderedProduct(long productId) {
-        //Shira
         return DataSource.allCustomers.stream().filter(customer ->
                         (DataSource.allOrders.stream().filter(order->order.getCustomrId()==customer
                                 .getId() && (DataSource.allOrderProducts.stream()
@@ -130,7 +115,6 @@ System.out.println(getOrderById(169));
 
     @Override
     public Product getMaxOrderedProduct() {
-        //Shira
         return DataSource.allProducts.stream()
                 .max((pr,pr2)-> (int)(DataSource.allOrderProducts.stream().
                         filter(order->order.getProductId()==pr.getProductId()) ).count()
@@ -149,12 +133,6 @@ System.out.println(getOrderById(169));
 
     @Override
     public List<Order> getExpensiveOrders(double price) {
-        System.out.println(sumOfOrder(990));
-        System.out.println(sumOfOrder(994));
-        System.out.println(sumOfOrder(24));
-        getOrderProducts(24).forEach(System.out::print);
-
-        getOrderProducts(990L).forEach(System.out::print);
 
         return DataSource.allOrders.stream().filter(ord->sumOfOrder(ord.getOrderId())>price) .
                 sorted(Comparator.comparingLong(Order::getOrderId)).collect(toList());
@@ -162,12 +140,6 @@ System.out.println(getOrderById(169));
 
     @Override
     public List<Customer> ThreeTierCustomerWithMaxOrders() {
-       /* return DataSource.allCustomers.
-                stream().filter(customer -> customer.getTier()==3).max((pr,pr2)->(int)
-                        (DataSource.allOrders.stream().filter(order->order.getCustomrId()==pr.getId())
-                                .count())- (int)(DataSource.allOrders.stream().filter(order->order.
-                        getCustomrId()==pr2.getId()).count())).stream(). sorted(Comparator.comparingLong(Customer::getId)).collect(toList());
-*/
 
         Customer c= DataSource.allCustomers.
                 stream().filter(customer -> customer.getTier()==3).max((pr,pr2)->(int)
@@ -184,8 +156,6 @@ System.out.println(getOrderById(169));
 
 
     }
-
-
 }
 
 
